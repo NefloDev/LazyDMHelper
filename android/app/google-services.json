@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "276507732601",
+    "project_id": "lazy-dm-helper-29af7",
+    "storage_bucket": "lazy-dm-helper-29af7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:276507732601:android:833ef718980594e2bfc2a8",
+        "android_client_info": {
+          "package_name": "alejandro.nebot.flores.lazy_dm_helper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "276507732601-q2ukhamp3i1q2t14j0pmi9sgfckaig71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "alejandro.nebot.flores.lazy_dm_helper",
+            "certificate_hash": "c8e7f545a4812960fbf869fbc81efa4ad1c138dc"
+          }
+        },
+        {
+          "client_id": "276507732601-mlmitk4hbg3egcfi8nehukvgimoua83e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPIpT1YeRS0jZcWzBYzdqchXyG2eJ-i90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "276507732601-mlmitk4hbg3egcfi8nehukvgimoua83e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
