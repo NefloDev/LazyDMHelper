@@ -20,7 +20,8 @@ class Themes{
         surfaceTint: CustomColors.surfaceContainerLowLight,
         surfaceVariant: CustomColors.onSurfaceVariantLight
     ),
-    useMaterial3: true
+    useMaterial3: true,
+    fontFamily: "JakartaSans"
   );
 
   static final ThemeData darkTheme = ThemeData(
@@ -41,6 +42,7 @@ class Themes{
           surfaceTint: CustomColors.surfaceContainerLowDark,
           surfaceVariant: CustomColors.onSurfaceVariantDark
       ),
-      useMaterial3: true
+      useMaterial3: true,
+      fontFamily: "JakartaSans"
   );
 }
