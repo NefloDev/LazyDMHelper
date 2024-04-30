@@ -32,9 +32,9 @@ class AuthService{
           password: password.trim());
       final User? firebaseUser = credential.user;
       return firebaseUser != null ? UserModel(
-          id: firebaseUser.uid ?? '',
-          email: firebaseUser.email ?? '',
-          displayName: firebaseUser.displayName ?? ''
+          id: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName
       ) : null;
     }on FirebaseAuthException catch(e){
       Logger logger = Logger();
@@ -56,9 +56,9 @@ class AuthService{
       final User? firebaseUser = userCredential.user;
 
       return firebaseUser != null ? UserModel(
-          id: firebaseUser.uid ?? '',
-          email: firebaseUser.email ?? '',
-          displayName: firebaseUser.displayName ?? ''
+          id: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName
       ) : null;
     }
     return null;
