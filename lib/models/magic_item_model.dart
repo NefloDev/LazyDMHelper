@@ -1,6 +1,6 @@
 class MagicItemModel{
   final String? id;
-  final String userId;
+  final String userid;
   final String name;
   final String description;
   final String rarity;
@@ -8,7 +8,7 @@ class MagicItemModel{
 
   MagicItemModel({
       this.id,
-      required this.userId,
+      required this.userid,
       required this.name,
       this.description = "",
       this.rarity = "",
@@ -17,7 +17,7 @@ class MagicItemModel{
 
   factory MagicItemModel.fromJson(dynamic json) => MagicItemModel(
       id: json["id"].toString(),
-      userId: json["userid"].toString(),
+      userid: json["userid"].toString(),
       name: json["name"].toString(),
       description: json["description"] ?? "",
       rarity: json["rarity"] ?? "",
@@ -27,7 +27,16 @@ class MagicItemModel{
   Map<String, dynamic> toJson(){
     return {
       "id": id,
-      "userid": userId,
+      "userid": userid,
+      "name": name,
+      "description": description,
+      "rarity": rarity,
+      "type": type
+    };
+  }
+
+  Map<String, dynamic> toReducedJson(){
+    return {
       "name": name,
       "description": description,
       "rarity": rarity,

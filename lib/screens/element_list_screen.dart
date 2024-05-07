@@ -115,7 +115,7 @@ class ElementListScreenState extends State<ElementListScreen>{
                       bottom: 24,
                       right: 24,
                       child: FloatingActionButton(
-                          onPressed: () => Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (BuildContext context) {
+                          onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
                             return switch(widget.endpoint){
                               Texts.magicItemsEndpoint => MagicItemCreationScreen(userid: user.id),
                               Texts.racesEndpoint => RaceCreationScreen(userid: user.id),
@@ -123,9 +123,12 @@ class ElementListScreenState extends State<ElementListScreen>{
                               Texts.equipmentsEndpoint => EquipmentCreationScreen(userid: user.id),
                               String() => throw UnimplementedError(),
                             };
-                          }), (_) => false),
-                          backgroundColor: CustomColors.highlight,
+                          })),
+                          backgroundColor: CustomColors.contrast,
                           foregroundColor: colors.surface,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100)
+                          ),
                           child: const Icon(Icons.add)
                       )
                     )

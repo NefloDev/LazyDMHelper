@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_dm_helper/constants/constants.dart';
 import 'package:lazy_dm_helper/constants/texts.dart';
 import 'package:lazy_dm_helper/core/api_manager.dart';
 import 'package:lazy_dm_helper/models/models.dart';
@@ -81,50 +82,74 @@ class MagicItemDetailScreenState extends State<MagicItemDetailScreen>{
                   ),
                 ),
                 widget.uid != "owner" ? Positioned(
-                    bottom: 24,
-                    right: 24,
-                    child: FloatingActionButton(
-                        onPressed: (){
-                          showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
-                            return AlertDialog(
-                                title: const Text(Texts.magicItemDelete),
-                                content: const Text(Texts.magicItemDeleteConfirm),
-                                actions: [
-                                  MaterialButton(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: const Text(Texts.no),
-                                  ),
-                                  MaterialButton(
-                                    onPressed: () {
-                                      APIManager.deleteMagicItem(uid: widget.uid, index: widget.index).then((val) {
-                                        Navigator.pop(context);
-                                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
-                                          return AlertDialog(
-                                              title: Text(val == 200 ? Texts.magicItemDeleteSuccess : Texts.magicItemDeleteFail),
-                                              actions: [
-                                                MaterialButton(
-                                                    child: const Text(Texts.close),
-                                                    onPressed: () { Navigator.of(context)
-                                                        .pushAndRemoveUntil(MaterialPageRoute(
-                                                        builder: (context) => const ElementListScreen(
-                                                            title: Texts.magicItems,
-                                                            endpoint: Texts.magicItemsEndpoint)
-                                                    ), (_) => false); }
-                                                )
-                                              ]
-                                          );
-                                        });
-                                      });
-                                    },
-                                    child: const Text(Texts.yes),
-                                  )
-                                ]
-                            );
-                          });
-                        },
-                        backgroundColor: colors.primaryContainer,
-                        foregroundColor: colors.surface,
-                        child: Icon(Icons.delete_forever, color: colors.secondary)
+                    bottom: 36,
+                    right: 36,
+                    left: 180,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FloatingActionButton(
+                            onPressed: (){
+                              showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
+                                return AlertDialog(
+                                    title: const Text(Texts.magicItemDelete),
+                                    content: const Text(Texts.magicItemDeleteConfirm),
+                                    actions: [
+                                      MaterialButton(
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text(Texts.no),
+                                      ),
+                                      MaterialButton(
+                                        onPressed: () {
+                                          APIManager.deleteMagicItem(uid: widget.uid, index: widget.index).then((val) {
+                                            Navigator.pop(context);
+                                            showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                  title: Text(val == 200 ? Texts.magicItemDeleteSuccess : Texts.magicItemDeleteFail),
+                                                  actions: [
+                                                    MaterialButton(
+                                                        child: const Text(Texts.close),
+                                                        onPressed: () { Navigator.of(context)
+                                                            .pushAndRemoveUntil(MaterialPageRoute(
+                                                            builder: (context) => const ElementListScreen(
+                                                                title: Texts.magicItems,
+                                                                endpoint: Texts.magicItemsEndpoint)
+                                                        ), (_) => false); }
+                                                    )
+                                                  ]
+                                              );
+                                            });
+                                          });
+                                        },
+                                        child: const Text(Texts.yes),
+                                      )
+                                    ]
+                                );
+                              });
+                            },
+                            backgroundColor: colors.primary,
+                            foregroundColor: colors.surface,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: const Icon(Icons.delete_forever)
+                        ),
+                        FloatingActionButton(
+                            onPressed: () => Navigator.of(context)
+                                .pushAndRemoveUntil(MaterialPageRoute(
+                                builder: (context) => MagicItemCreationScreen(
+                                    userid: magicItem!.userid,
+                                    data: magicItem!
+                                )
+                            ), (_) => false),
+                            backgroundColor: CustomColors.contrast,
+                            foregroundColor: colors.surface,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(100)
+                            ),
+                            child: const Icon(Icons.edit)
+                        )
+                      ],
                     )
                 ) : const SizedBox.shrink()
               ]

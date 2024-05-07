@@ -25,11 +25,11 @@ class MyApp extends StatelessWidget {
     return BlocProvider<AuthenticationBloc>(
       create: (context) => AuthenticationBloc(),
       child: MaterialApp(
-        title: 'Lazy DM Helper',
-        debugShowCheckedModeBanner: false,
-        theme: Themes.lightTheme,
-        darkTheme: Themes.darkTheme,
-        home: const LoginScreen()
+          title: 'Lazy DM Helper',
+          debugShowCheckedModeBanner: false,
+          theme: Themes.lightTheme,
+          darkTheme: Themes.darkTheme,
+          home: const LoginScreen()
       ),
     );
   }

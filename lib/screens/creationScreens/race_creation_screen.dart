@@ -2,30 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:lazy_dm_helper/constants/constants.dart';
 import 'package:lazy_dm_helper/core/api_manager.dart';
 import 'package:lazy_dm_helper/models/race_model.dart';
+import 'package:lazy_dm_helper/screens/detail_screens/detail_screens.dart';
 import 'package:lazy_dm_helper/screens/element_list_screen.dart';
 import 'package:lazy_dm_helper/widgets/data_creation_text_form.dart';
 
 class RaceCreationScreen extends StatefulWidget{
-  const RaceCreationScreen({super.key, required this.userid});
+  const RaceCreationScreen({super.key, required this.userid, this.data});
 
   final String userid;
+  final RaceModel? data;
 
   @override
   State<StatefulWidget> createState() => RaceCreationScreenState();
 }
 
 class RaceCreationScreenState extends State<RaceCreationScreen>{
-  TextEditingController nameController = TextEditingController();
-  TextEditingController asiController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-  TextEditingController sizeController = TextEditingController();
-  TextEditingController speedController = TextEditingController();
-  TextEditingController alignmentController = TextEditingController();
-  TextEditingController languagesController = TextEditingController();
-  TextEditingController traitsController = TextEditingController();
-  TextEditingController startingProficienciesController = TextEditingController();
-  TextEditingController startingProficiencyOptionsController = TextEditingController();
-  TextEditingController subRacesController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController asiController;
+  late TextEditingController ageController;
+  late TextEditingController sizeController;
+  late TextEditingController speedController;
+  late TextEditingController alignmentController;
+  late TextEditingController languagesController;
+  late TextEditingController traitsController;
+  late TextEditingController startingProficienciesController;
+  late TextEditingController startingProficiencyOptionsController;
+  late TextEditingController subRacesController;
 
   late bool waiting;
 
@@ -33,6 +35,17 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
   void initState() {
     super.initState();
     waiting = false;
+    nameController = TextEditingController(text: widget.data?.name);
+    asiController = TextEditingController(text: widget.data?.asi);
+    ageController = TextEditingController(text: widget.data?.age);
+    sizeController = TextEditingController(text: widget.data?.size);
+    speedController = TextEditingController(text: widget.data?.speed.toString());
+    alignmentController = TextEditingController(text: widget.data?.alignment);
+    languagesController = TextEditingController(text: widget.data?.languages);
+    traitsController = TextEditingController(text: widget.data?.traits);
+    startingProficienciesController = TextEditingController(text: widget.data?.startingProficiencies);
+    startingProficiencyOptionsController = TextEditingController(text: widget.data?.startingProficiencyOptions);
+    subRacesController = TextEditingController(text: widget.data?.subRaces);
   }
 
   @override
@@ -44,7 +57,9 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
         title: const Text(Texts.raceTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+          onPressed: widget.data == null ? () => Navigator.pop(context)
+              : () => Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) => RaceDetailScreen(index: widget.data!.id!, uid: widget.data!.userid)), (_) => false),
         ),
       ),
       body: SingleChildScrollView(
@@ -54,7 +69,7 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
             DataCreationTextForm(controller: asiController, labelText: Texts.asi),
             DataCreationTextForm(controller: ageController, labelText: Texts.age),
             DataCreationTextForm(controller: sizeController, labelText: Texts.size),
-            DataCreationTextForm(controller: speedController, labelText: Texts.speed),
+            DataCreationTextForm(controller: speedController, labelText: Texts.speed, isNumeric: true),
             DataCreationTextForm(controller: alignmentController, labelText: Texts.alignment),
             DataCreationTextForm(controller: languagesController, labelText: Texts.languages),
             DataCreationTextForm(controller: traitsController, labelText: Texts.traits),
@@ -79,7 +94,7 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
                         asi: asiController.text.trim(),
                         age: ageController.text.trim(),
                         size: sizeController.text.trim(),
-                        speed: speedController.text.trim() as int,
+                        speed: int.parse(speedController.text.trim().isEmpty ? "0": speedController.text.trim()),
                         alignment: alignmentController.text.trim(),
                         languages: languagesController.text.trim(),
                         traits: traitsController.text.trim(),
@@ -87,7 +102,7 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
                         startingProficiencyOptions: startingProficiencyOptionsController.text.trim(),
                         subRaces: subRacesController.text.trim(),
                       );
-                      APIManager.saveData(json: temp.toJson(), endpointPlural: Texts.classesEndpoint).then((value) {
+                      widget.data == null ? APIManager.saveData(json: temp.toJson(), endpointPlural: Texts.racesEndpoint).then((value) {
                         setState(() {
                           waiting = false;
                         });
@@ -95,6 +110,27 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
                           return AlertDialog(
                               title: const Text(Texts.raceSave),
                               content: const Text(Texts.raceSaveSuccess),
+                              actions: [
+                                MaterialButton(
+                                    child: const Text(Texts.close),
+                                    onPressed: () { Navigator.of(context)
+                                        .pushAndRemoveUntil(MaterialPageRoute(
+                                        builder: (context) => const ElementListScreen(
+                                            title: Texts.races,
+                                            endpoint: Texts.racesEndpoint)
+                                    ), (_) => false); }
+                                )
+                              ]
+                          );
+                        });
+                      }) : APIManager.updateData(json: temp.toJson(), index: widget.data!.id!, endpointPlural: Texts.racesEndpoint, endpoint: Texts.raceEndpoint, uid: widget.data!.userid).then((value) {
+                        setState(() {
+                          waiting = false;
+                        });
+                        showDialog(context: context, builder: (BuildContext context) {
+                          return AlertDialog(
+                              title: const Text(Texts.raceSave),
+                              content: const Text(Texts.raceUpdateSuccess),
                               actions: [
                                 MaterialButton(
                                     child: const Text(Texts.close),

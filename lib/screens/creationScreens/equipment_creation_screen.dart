@@ -2,31 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:lazy_dm_helper/constants/constants.dart';
 import 'package:lazy_dm_helper/core/api_manager.dart';
 import 'package:lazy_dm_helper/models/equipment_model.dart';
+import 'package:lazy_dm_helper/screens/detail_screens/detail_screens.dart';
 import 'package:lazy_dm_helper/screens/element_list_screen.dart';
 import 'package:lazy_dm_helper/widgets/data_creation_text_form.dart';
 
 class EquipmentCreationScreen extends StatefulWidget{
-  const EquipmentCreationScreen({super.key, required this.userid});
+  const EquipmentCreationScreen({super.key, required this.userid, this.data});
 
   final String userid;
+  final EquipmentModel? data;
 
   @override
   State<StatefulWidget> createState() => EquipmentCreationScreenState();
 }
 
 class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
-  TextEditingController nameController = TextEditingController();
-  TextEditingController descController = TextEditingController();
-  TextEditingController categoryController = TextEditingController();
-  TextEditingController typeController = TextEditingController();
-  TextEditingController costController = TextEditingController();
-  TextEditingController weightController = TextEditingController();
-  TextEditingController rangeController = TextEditingController();
-  TextEditingController damageController = TextEditingController();
-  TextEditingController speedController = TextEditingController();
-  TextEditingController contentsController = TextEditingController();
-  TextEditingController propertiesController = TextEditingController();
-  TextEditingController specialController = TextEditingController();
+  late TextEditingController nameController;
+  late TextEditingController descController;
+  late TextEditingController categoryController;
+  late TextEditingController typeController;
+  late TextEditingController costController;
+  late TextEditingController weightController;
+  late TextEditingController rangeController;
+  late TextEditingController damageController;
+  late TextEditingController speedController;
+  late TextEditingController contentsController;
+  late TextEditingController propertiesController;
+  late TextEditingController specialController;
 
   late bool waiting;
 
@@ -34,6 +36,18 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
   void initState() {
     super.initState();
     waiting = false;
+    nameController = TextEditingController(text: widget.data?.name);
+    descController = TextEditingController(text: widget.data?.description);
+    categoryController = TextEditingController(text: widget.data?.category);
+    typeController = TextEditingController(text: widget.data?.type);
+    costController = TextEditingController(text: widget.data?.cost);
+    weightController = TextEditingController(text: widget.data?.weight.toString());
+    rangeController = TextEditingController(text: widget.data?.range);
+    damageController = TextEditingController(text: widget.data?.damage);
+    speedController = TextEditingController(text: widget.data?.speed.toString());
+    contentsController = TextEditingController(text: widget.data?.contents);
+    propertiesController = TextEditingController(text: widget.data?.properties);
+    specialController = TextEditingController(text: widget.data?.special);
   }
 
   @override
@@ -45,7 +59,9 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
         title: const Text(Texts.equipmentTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
+          onPressed: widget.data == null ? () => Navigator.pop(context)
+          : () => Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) => EquipmentDetailScreen(index: widget.data!.id!, uid: widget.data!.userid)), (_) => false),
         ),
       ),
       body: SingleChildScrollView(
@@ -82,15 +98,15 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
                         category: categoryController.text.trim(),
                         type: typeController.text.trim(),
                         cost: costController.text.trim(),
-                        weight: weightController.text.trim() as double,
+                        weight: double.parse(weightController.text.trim().isEmpty ? "0" : weightController.text.trim()),
                         range: rangeController.text.trim(),
                         damage: damageController.text.trim(),
-                        speed: speedController.text.trim() as int,
+                        speed: int.parse(speedController.text.trim().isEmpty ? "0" : speedController.text.trim()),
                         contents: contentsController.text.trim(),
                         properties: propertiesController.text.trim(),
                         special: specialController.text.trim()
                       );
-                      APIManager.saveData(json: temp.toJson(), endpointPlural: Texts.classesEndpoint).then((value) {
+                      widget.data == null ? APIManager.saveData(json: temp.toJson(), endpointPlural: Texts.equipmentsEndpoint).then((value) {
                         setState(() {
                           waiting = false;
                         });
@@ -98,6 +114,27 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
                           return AlertDialog(
                               title: const Text(Texts.equipmentSave),
                               content: const Text(Texts.equipmentSaveSuccess),
+                              actions: [
+                                MaterialButton(
+                                    child: const Text(Texts.close),
+                                    onPressed: () { Navigator.of(context)
+                                        .pushAndRemoveUntil(MaterialPageRoute(
+                                        builder: (context) => const ElementListScreen(
+                                            title: Texts.equipment,
+                                            endpoint: Texts.equipmentsEndpoint)
+                                    ), (_) => false); }
+                                )
+                              ]
+                          );
+                        });
+                      }) : APIManager.updateData(json: temp.toJson(), index: widget.data!.id!, endpointPlural: Texts.equipmentsEndpoint, endpoint: Texts.equipmentEndpoint, uid: widget.data!.userid).then((value){
+                        setState(() {
+                          waiting = false;
+                        });
+                        showDialog(context: context, builder: (BuildContext context) {
+                          return AlertDialog(
+                              title: const Text(Texts.equipmentSave),
+                              content: const Text(Texts.equipmentUpdateSuccess),
                               actions: [
                                 MaterialButton(
                                     child: const Text(Texts.close),

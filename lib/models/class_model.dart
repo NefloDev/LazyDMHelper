@@ -50,4 +50,17 @@ class ClassModel{
       "spellcasting": spellCasting
     };
   }
+
+  Map<String, dynamic> toReducedJson(){
+    return{
+      "name": name,
+      "proficiencyOptions": proficiencyOptions,
+      "proficiencies": proficiencies,
+      "savingThrows": savingThrows,
+      "startingEquipment": startingEquipment,
+      "startingEquipmentOptions": startingEquipmentOptions,
+      "subclasses": subclasses,
+      "spellcasting": spellCasting
+    };
+  }
 }

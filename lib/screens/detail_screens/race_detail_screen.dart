@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazy_dm_helper/constants/constants.dart';
 import 'package:lazy_dm_helper/constants/texts.dart';
 import 'package:lazy_dm_helper/core/api_manager.dart';
 import 'package:lazy_dm_helper/models/models.dart';
@@ -109,50 +110,74 @@ class RaceDetailScreenState extends State<RaceDetailScreen>{
                     ),
                   ),
                   widget.uid != "owner" ? Positioned(
-                      bottom: 24,
-                      right: 24,
-                      child: FloatingActionButton(
-                          onPressed: (){
-                            showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
-                              return AlertDialog(
-                                  title: const Text(Texts.raceDelete),
-                                  content: const Text(Texts.raceDeleteConfirm),
-                                  actions: [
-                                    MaterialButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: const Text(Texts.no),
-                                    ),
-                                    MaterialButton(
-                                      onPressed: (){
-                                        APIManager.deleteRace(uid: widget.uid, index: widget.index).then((value) {
-                                          Navigator.pop(context);
-                                          showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
-                                            return AlertDialog(
-                                                title: Text(value == 200 ? Texts.raceDeleteSuccess : Texts.raceDeleteFail),
-                                                actions: [
-                                                  MaterialButton(
-                                                      child: const Text(Texts.close),
-                                                      onPressed: () { Navigator.of(context)
-                                                          .pushAndRemoveUntil(MaterialPageRoute(
-                                                          builder: (context) => const ElementListScreen(
-                                                              title: Texts.races,
-                                                              endpoint: Texts.racesEndpoint)
-                                                      ), (_) => false); }
-                                                  )
-                                                ]
-                                            );
-                                          });
-                                        });
-                                      },
-                                      child: const Text(Texts.yes),
-                                    )
-                                  ]
-                              );
-                            });
-                          },
-                          backgroundColor: colors.primaryContainer,
-                          foregroundColor: colors.surface,
-                          child: Icon(Icons.delete_forever, color: colors.secondary)
+                      bottom: 36,
+                      right: 36,
+                      left: 180,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          FloatingActionButton(
+                              onPressed: (){
+                                showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
+                                  return AlertDialog(
+                                      title: const Text(Texts.raceDelete),
+                                      content: const Text(Texts.raceDeleteConfirm),
+                                      actions: [
+                                        MaterialButton(
+                                          onPressed: () => Navigator.pop(context),
+                                          child: const Text(Texts.no),
+                                        ),
+                                        MaterialButton(
+                                          onPressed: (){
+                                            APIManager.deleteRace(uid: widget.uid, index: widget.index).then((value) {
+                                              Navigator.pop(context);
+                                              showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
+                                                return AlertDialog(
+                                                    title: Text(value == 200 ? Texts.raceDeleteSuccess : Texts.raceDeleteFail),
+                                                    actions: [
+                                                      MaterialButton(
+                                                          child: const Text(Texts.close),
+                                                          onPressed: () { Navigator.of(context)
+                                                              .pushAndRemoveUntil(MaterialPageRoute(
+                                                              builder: (context) => const ElementListScreen(
+                                                                  title: Texts.races,
+                                                                  endpoint: Texts.racesEndpoint)
+                                                          ), (_) => false); }
+                                                      )
+                                                    ]
+                                                );
+                                              });
+                                            });
+                                          },
+                                          child: const Text(Texts.yes),
+                                        )
+                                      ]
+                                  );
+                                });
+                              },
+                              backgroundColor: colors.primary,
+                              foregroundColor: colors.surface,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: const Icon(Icons.delete_forever)
+                          ),
+                          FloatingActionButton(
+                              onPressed: () => Navigator.of(context)
+                                  .pushAndRemoveUntil(MaterialPageRoute(
+                                  builder: (context) => RaceCreationScreen(
+                                      userid: race!.userid,
+                                      data: race!
+                                  )
+                              ), (_) => false),
+                              backgroundColor: CustomColors.contrast,
+                              foregroundColor: colors.surface,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100)
+                              ),
+                              child: const Icon(Icons.edit)
+                          )
+                        ],
                       )
                   ) : const SizedBox.shrink()
                 ],

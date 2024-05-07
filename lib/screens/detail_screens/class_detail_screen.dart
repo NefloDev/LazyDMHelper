@@ -125,8 +125,8 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
                         ),
                       ),
                       widget.uid != "owner" ? Positioned(
-                          bottom: 24,
-                          right: 24,
+                          bottom: 36,
+                          right: 36,
                           left: 180,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -170,9 +170,12 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
                                       );
                                     });
                                   },
-                                  backgroundColor: colors.primaryContainer,
+                                  backgroundColor: colors.primary,
                                   foregroundColor: colors.surface,
-                                  child: Icon(Icons.delete_forever, color: colors.secondary)
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)
+                                  ),
+                                  child: const Icon(Icons.delete_forever)
                               ),
                               FloatingActionButton(
                                   onPressed: () => Navigator.of(context)
@@ -182,9 +185,12 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
                                         data: classModel!
                                       )
                                   ), (_) => false),
-                                  backgroundColor: CustomColors.highlight,
+                                  backgroundColor: CustomColors.contrast,
                                   foregroundColor: colors.surface,
-                                  child: Icon(Icons.edit, color: colors.secondary)
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)
+                                  ),
+                                  child: const Icon(Icons.edit)
                               )
                             ],
                           )

@@ -62,4 +62,20 @@ class RaceModel{
       "subraces": subRaces
     };
   }
+
+  Map<String, dynamic> toReducedJson(){
+    return {
+      "name": name,
+      "asi": asi,
+      "age": age,
+      "size": size,
+      "speed": speed,
+      "alignment": alignment,
+      "languages": languages,
+      "traits": traits,
+      "startingProficiencies": startingProficiencies,
+      "startingProficiencyOptions": startingProficiencyOptions,
+      "subraces": subRaces
+    };
+  }
 }

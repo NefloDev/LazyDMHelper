@@ -111,50 +111,74 @@ class EquipmentDetailScreenState extends State<EquipmentDetailScreen>{
                         ),
                       ),
                       widget.uid != "owner" ? Positioned(
-                          bottom: 24,
-                          right: 24,
-                          child: FloatingActionButton(
-                              onPressed: (){
-                                showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
-                                  return AlertDialog(
-                                    title: const Text(Texts.equipmentDelete),
-                                    content: const Text(Texts.equipmentDeleteConfirm),
-                                    actions: [
-                                      MaterialButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: const Text(Texts.no),
-                                      ),
-                                      MaterialButton(
-                                        onPressed: () {
-                                          APIManager.deleteEquipment(uid: widget.uid, index: widget.index).then((value) {
-                                            Navigator.pop(context);
-                                            showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
-                                              return AlertDialog(
-                                                  title: Text(value == 200 ? Texts.equipmentDeleteSuccess : Texts.equipmentDeleteFail),
-                                                  actions: [
-                                                    MaterialButton(
-                                                        child: const Text(Texts.close),
-                                                        onPressed: () { Navigator.of(context)
-                                                            .pushAndRemoveUntil(MaterialPageRoute(
-                                                            builder: (context) => const ElementListScreen(
-                                                                title: Texts.equipment,
-                                                                endpoint: Texts.equipmentsEndpoint)
-                                                        ), (_) => false); }
-                                                    )
-                                                  ]
-                                              );
-                                            });
-                                          });
-                                        },
-                                        child: const Text(Texts.yes),
+                          bottom: 36,
+                          right: 36,
+                          left: 180,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FloatingActionButton(
+                                  onPressed: (){
+                                    showDialog(context: context, barrierDismissible: false, builder: (BuildContext context){
+                                      return AlertDialog(
+                                        title: const Text(Texts.equipmentDelete),
+                                        content: const Text(Texts.equipmentDeleteConfirm),
+                                        actions: [
+                                          MaterialButton(
+                                            onPressed: () => Navigator.pop(context),
+                                            child: const Text(Texts.no),
+                                          ),
+                                          MaterialButton(
+                                            onPressed: () {
+                                              APIManager.deleteEquipment(uid: widget.uid, index: widget.index).then((value) {
+                                                Navigator.pop(context);
+                                                showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
+                                                  return AlertDialog(
+                                                      title: Text(value == 200 ? Texts.equipmentDeleteSuccess : Texts.equipmentDeleteFail),
+                                                      actions: [
+                                                        MaterialButton(
+                                                            child: const Text(Texts.close),
+                                                            onPressed: () { Navigator.of(context)
+                                                                .pushAndRemoveUntil(MaterialPageRoute(
+                                                                builder: (context) => const ElementListScreen(
+                                                                    title: Texts.equipment,
+                                                                    endpoint: Texts.equipmentsEndpoint)
+                                                            ), (_) => false); }
+                                                        )
+                                                      ]
+                                                  );
+                                                });
+                                              });
+                                            },
+                                            child: const Text(Texts.yes),
+                                          )
+                                        ],
+                                      );
+                                    });
+                                  },
+                                  backgroundColor: colors.primary,
+                                  foregroundColor: colors.surface,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)
+                                  ),
+                                  child: const Icon(Icons.delete_forever)
+                              ),
+                              FloatingActionButton(
+                                  onPressed: () => Navigator.of(context)
+                                      .pushAndRemoveUntil(MaterialPageRoute(
+                                      builder: (context) => EquipmentCreationScreen(
+                                          userid: equipment!.userid,
+                                          data: equipment!
                                       )
-                                    ],
-                                  );
-                                });
-                              },
-                              backgroundColor: colors.primaryContainer,
-                              foregroundColor: colors.surface,
-                              child: Icon(Icons.delete_forever, color: colors.secondary)
+                                  ), (_) => false),
+                                  backgroundColor: CustomColors.contrast,
+                                  foregroundColor: colors.surface,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100)
+                                  ),
+                                  child: const Icon(Icons.edit)
+                              )
+                            ],
                           )
                       ) : const SizedBox.shrink()
                     ]

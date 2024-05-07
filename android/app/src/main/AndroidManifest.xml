@@ -5,6 +5,7 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:enableOnBackInvokedCallback="true"
+        android:requestLegacyExternalStorage="true"
         tools:targetApi="tiramisu">
         <activity
             android:name=".MainActivity"

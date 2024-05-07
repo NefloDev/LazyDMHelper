@@ -66,4 +66,21 @@ class EquipmentModel{
       "special": special
     };
   }
+
+  Map<String, dynamic> toReducedJson(){
+    return {
+      "name": name,
+      "description": description,
+      "category": category,
+      "type": type,
+      "cost": cost,
+      "weight": weight,
+      "range": range,
+      "damage": damage,
+      "speed": speed,
+      "contents": contents,
+      "properties": properties,
+      "special": special
+    };
+  }
 }
