@@ -17,8 +17,10 @@ class Themes{
         onSurface: CustomColors.onSurfaceLight,
         primaryContainer: CustomColors.primaryContainerLight,
         secondaryContainer: CustomColors.secondaryContainerLight,
+        onSecondaryContainer: CustomColors.onSecondaryContainerLight,
         surfaceTint: CustomColors.surfaceContainerLowLight,
-        surfaceVariant: CustomColors.onSurfaceVariantLight
+        surfaceVariant: CustomColors.onSurfaceVariantLight,
+        outlineVariant: CustomColors.outlineVariantLight
     ),
     useMaterial3: true,
     fontFamily: "JakartaSans"
@@ -39,8 +41,10 @@ class Themes{
           onSurface: CustomColors.onSurfaceDark,
           primaryContainer: CustomColors.primaryContainerDark,
           secondaryContainer: CustomColors.secondaryContainerDark,
+          onSecondaryContainer: CustomColors.onSecondaryContainerDark,
           surfaceTint: CustomColors.surfaceContainerLowDark,
-          surfaceVariant: CustomColors.onSurfaceVariantDark
+          surfaceVariant: CustomColors.onSurfaceVariantDark,
+          outlineVariant: CustomColors.outlineVariantDark
       ),
       useMaterial3: true,
       fontFamily: "JakartaSans"

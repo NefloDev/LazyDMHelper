@@ -16,10 +16,12 @@ class CustomColors{
   static const Color secondaryLight = Color(0xFF775654);
   static const Color onSecondaryLight = Colors.white;
   static const Color secondaryContainerLight = Color(0xFFFFDAD7);
+  static const Color onSecondaryContainerLight = Color(0xFF2C1514);
   static const Color surfaceContainerHighLight = Color(0xFFF1DEDD);
   static const Color surfaceContainerLowLight = Color(0xFFFFF0EF);
   static const Color onSurfaceLight = Color(0xFF231919);
   static const Color onSurfaceVariantLight = Color(0xFF534342);
+  static const Color outlineVariantLight = Color(0xFFD8C2C0);
   static const Color errorLight = Color(0xFFBA1A1A);
   static const Color onErrorLight = Colors.white;
   //Dark theme colors
@@ -31,10 +33,12 @@ class CustomColors{
   static const Color secondaryDark = Color(0xFFE7BDB9);
   static const Color onSecondaryDark = Color(0xFF442928);
   static const Color secondaryContainerDark = Color(0xFF5D3F3D);
+  static const Color onSecondaryContainerDark = Color(0xFFFFDAD7);
   static const Color surfaceContainerHighDark = Color(0xFF322827);
-  static const Color surfaceContainerLowDark = Color(0xFF322827);
+  static const Color surfaceContainerLowDark = Color(0xFF231919);
   static const Color onSurfaceDark = Color(0xFFF1DEDD);
   static const Color onSurfaceVariantDark = Color(0xFFD8C2C0);
+  static const Color outlineVariantDark = Color(0xFF534342);
   static const Color errorDark = Color(0xFFFFB4AB);
   static const Color onErrorDark = Color(0xFF690005);
 }
