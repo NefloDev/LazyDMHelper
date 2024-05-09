@@ -79,7 +79,7 @@ class MagicItemCreationScreenState extends State<MagicItemCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text(Texts.magicItemSave),
                             content: const Text(Texts.magicItemSaveSuccess),
@@ -100,7 +100,7 @@ class MagicItemCreationScreenState extends State<MagicItemCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                               title: const Text(Texts.magicItemSave),
                               content: const Text(Texts.magicItemUpdateSuccess),

@@ -100,7 +100,7 @@ class ClassCreationScreenState extends State<ClassCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                               title: const Text(Texts.classSave),
                               content: const Text(Texts.classSaveSuccess),
@@ -121,7 +121,7 @@ class ClassCreationScreenState extends State<ClassCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                               title: const Text(Texts.classSave),
                               content: const Text(Texts.classUpdateSuccess),

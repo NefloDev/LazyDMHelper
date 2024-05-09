@@ -94,7 +94,7 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
                         asi: asiController.text.trim(),
                         age: ageController.text.trim(),
                         size: sizeController.text.trim(),
-                        speed: int.parse(speedController.text.trim().isEmpty ? "0": speedController.text.trim()),
+                        speed: int.tryParse(speedController.text.trim()) ?? 0,
                         alignment: alignmentController.text.trim(),
                         languages: languagesController.text.trim(),
                         traits: traitsController.text.trim(),
@@ -106,7 +106,7 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                               title: const Text(Texts.raceSave),
                               content: const Text(Texts.raceSaveSuccess),
@@ -127,7 +127,7 @@ class RaceCreationScreenState extends State<RaceCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                               title: const Text(Texts.raceSave),
                               content: const Text(Texts.raceUpdateSuccess),

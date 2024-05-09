@@ -5,8 +5,9 @@ class DataCreationTextForm extends StatelessWidget{
   final TextEditingController controller;
   final String labelText;
   final bool isNumeric;
+  final bool isDecimal;
 
-  const DataCreationTextForm({super.key, required this.controller, required this.labelText, this.isNumeric = false});
+  const DataCreationTextForm({super.key, required this.controller, required this.labelText, this.isNumeric = false, this.isDecimal = false});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class DataCreationTextForm extends StatelessWidget{
             border: const OutlineInputBorder(),
             labelText: labelText
         ),
-        keyboardType: isNumeric ? TextInputType.number : TextInputType.text,
+        keyboardType: isNumeric || isDecimal ? TextInputType.numberWithOptions(decimal: isDecimal) : TextInputType.text,
       ),
     );
   }

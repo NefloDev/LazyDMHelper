@@ -72,10 +72,10 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
             DataCreationTextForm(controller: categoryController, labelText: Texts.category),
             DataCreationTextForm(controller: typeController, labelText: Texts.type),
             DataCreationTextForm(controller: costController, labelText: Texts.cost),
-            DataCreationTextForm(controller: weightController, labelText: Texts.weight),
+            DataCreationTextForm(controller: weightController, labelText: Texts.weight, isDecimal: true,),
             DataCreationTextForm(controller: rangeController, labelText: Texts.range),
             DataCreationTextForm(controller: damageController, labelText: Texts.damage),
-            DataCreationTextForm(controller: speedController, labelText: Texts.speed),
+            DataCreationTextForm(controller: speedController, labelText: Texts.speed, isNumeric: true,),
             DataCreationTextForm(controller: contentsController, labelText: Texts.contents),
             DataCreationTextForm(controller: propertiesController, labelText: Texts.properties),
             DataCreationTextForm(controller: specialController, labelText: Texts.special),
@@ -98,10 +98,10 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
                         category: categoryController.text.trim(),
                         type: typeController.text.trim(),
                         cost: costController.text.trim(),
-                        weight: double.parse(weightController.text.trim().isEmpty ? "0" : weightController.text.trim()),
+                        weight: double.tryParse(weightController.text.trim()) ?? 0.0,
                         range: rangeController.text.trim(),
                         damage: damageController.text.trim(),
-                        speed: int.parse(speedController.text.trim().isEmpty ? "0" : speedController.text.trim()),
+                        speed: int.tryParse(speedController.text.trim()) ?? 0,
                         contents: contentsController.text.trim(),
                         properties: propertiesController.text.trim(),
                         special: specialController.text.trim()
@@ -110,7 +110,7 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                               title: const Text(Texts.equipmentSave),
                               content: const Text(Texts.equipmentSaveSuccess),
@@ -131,7 +131,7 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
                         setState(() {
                           waiting = false;
                         });
-                        showDialog(context: context, builder: (BuildContext context) {
+                        showDialog(context: context, barrierDismissible: false, builder: (BuildContext context) {
                           return AlertDialog(
                               title: const Text(Texts.equipmentSave),
                               content: const Text(Texts.equipmentUpdateSuccess),

@@ -28,6 +28,7 @@ class ElementListScreenState extends State<ElementListScreen>{
   }
 
   Future getElementsList(String uid) async {
+    elements.clear();
     List temp = await APIManager.getElements(endpoint: widget.endpoint, uid: uid);
     setState(() {
       elements.addAll(temp);
@@ -67,9 +68,6 @@ class ElementListScreenState extends State<ElementListScreen>{
                       right: 0,
                       child: RefreshIndicator(
                         onRefresh: () async {
-                          setState(() {
-                            elements.clear();
-                          });
                           getElementsList(user.id);
                         },
                         child: SingleChildScrollView(
