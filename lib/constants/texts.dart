@@ -38,6 +38,7 @@ class Texts{
   static const String equipmentDeleteFail= "Failed to delete Equipment";
   static const String raceDeleteFail = "Failed to delete Race";
   static const String dataDeleteFail = "Failed to completely delete data";
+  static const String divideElements = "Use '#' to divide elements";
 
   //BUTTONS
   static const String forgotPassword = "Forgot your password?";

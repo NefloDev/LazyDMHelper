@@ -202,7 +202,7 @@ class RegisterScreenState extends State<RegisterScreen>{
                     padding: const EdgeInsets.all(10.0),
                     child: Text(Texts.register,
                       style: TextStyle(
-                          color: colors.surface
+                          color: colors.onSurface
                       ),
                     ),
                   )

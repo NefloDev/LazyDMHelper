@@ -128,7 +128,7 @@ class LoginScreenState extends State<LoginScreen>{
                                         showDialog(context: context, builder: (BuildContext context){
                                           TextEditingController cont = TextEditingController();
                                           return AlertDialog(
-                                            title: const Text(Texts.reset),
+                                            title: const Text(Texts.resetPasswd),
                                             content: Column(
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
@@ -156,8 +156,8 @@ class LoginScreenState extends State<LoginScreen>{
                                                             Navigator.of(context).pop();
                                                             showDialog(context: context, builder: (BuildContext context){
                                                               return AlertDialog(
-                                                                  title: const Text("Reset password"),
-                                                                  content: Text("An email to reset your password has been sent to: $email"),
+                                                                  title: const Text(Texts.resetPasswd),
+                                                                  content: Text("${Texts.resetPasswdEmailSent} $email"),
                                                                   actions: <Widget>[
                                                                     MaterialButton(
                                                                         child: const Text(Texts.close),
@@ -168,7 +168,7 @@ class LoginScreenState extends State<LoginScreen>{
                                                             });
                                                           }
                                                         },
-                                                      child: Text("Continue"),
+                                                      child: const Text("Continue"),
                                                     )
                                                   ],
                                                 ),
@@ -197,7 +197,6 @@ class LoginScreenState extends State<LoginScreen>{
                                       service.signInEmailPassword(email: emailController.text, password: passwordController.text).then((value){
                                         if(value != null){
                                           context.read<AuthenticationBloc>().add(UpdateUserEvent(value));
-                                          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuScreen()));
                                         }else{
                                           String message;
                                           if(emailController.text.isEmpty){
@@ -246,7 +245,6 @@ class LoginScreenState extends State<LoginScreen>{
                                           if(user != null){
                                             APIManager.saveData(json: user.toJson(), endpointPlural: Texts.usersEndpoint);
                                             context.read<AuthenticationBloc>().add(UpdateUserEvent(user));
-                                            Navigator.push(context, MaterialPageRoute(builder: (context) => const MenuScreen()));
                                           }
                                         });
                                       },

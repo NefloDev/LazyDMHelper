@@ -43,7 +43,12 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(classModel != null ? classModel!.name : Texts.classTitle)
+          title: Text(classModel != null ? classModel!.name : Texts.classTitle),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) => const ElementListScreen(title: Texts.classes, endpoint: Texts.classesEndpoint)), (_) => false),
+          ),
         ),
         body: classModel == null ? const Center(child: LoadingIndicator())
             : CustomScrollView(
@@ -105,15 +110,11 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: List.generate(classModel!.spellCasting.split("#").length, (index){
                                                 String data = classModel!.spellCasting.replaceAll(".,", ".").split("#")[index];
-                                                if(index == 0){
-                                                  return Column(
-                                                    children: [
-                                                      TitleAndText(title: data.split(":")[0], text: data.split(":")[1].split("\n")[0]),
-                                                      TitleAndText(title: data.split(":")[1].split("\n")[1], text: data.split(":")[2]),
-                                                    ],
-                                                  );
+                                                if(data.split("::").length > 1){
+                                                  return TitleAndText(title: data.split("::")[0], text: data.split("::")[1]);
+                                                }else{
+                                                  return TitleAndText(title: data[0], text: "");
                                                 }
-                                                return TitleAndText(title: data.split("::")[0], text: data.split("::")[1]);
                                               }),
                                             )
                                           ],
@@ -126,8 +127,8 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
                       ),
                       widget.uid != "owner" ? Positioned(
                           bottom: 36,
-                          right: 36,
-                          left: 180,
+                          right: 24,
+                          left: 190,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -171,7 +172,7 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
                                     });
                                   },
                                   backgroundColor: colors.primary,
-                                  foregroundColor: colors.surface,
+                                  foregroundColor: colors.background,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(100)
                                   ),
@@ -186,7 +187,7 @@ class ClassDetailScreenState extends State<ClassDetailScreen>{
                                       )
                                   ), (_) => false),
                                   backgroundColor: CustomColors.contrast,
-                                  foregroundColor: colors.surface,
+                                  foregroundColor: colors.background,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(100)
                                   ),

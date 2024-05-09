@@ -43,7 +43,12 @@ class MagicItemDetailScreenState extends State<MagicItemDetailScreen>{
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(magicItem != null ? magicItem!.name : Texts.magicItemTitle)
+        title: Text(magicItem != null ? magicItem!.name : Texts.magicItemTitle),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (context) => const ElementListScreen(title: Texts.magicItems, endpoint: Texts.magicItemsEndpoint)), (_) => false),
+        ),
       ),
       body: magicItem == null ? const Center(child: LoadingIndicator())
           : CustomScrollView(
@@ -83,8 +88,8 @@ class MagicItemDetailScreenState extends State<MagicItemDetailScreen>{
                 ),
                 widget.uid != "owner" ? Positioned(
                     bottom: 36,
-                    right: 36,
-                    left: 180,
+                    right: 24,
+                    left: 190,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -128,7 +133,7 @@ class MagicItemDetailScreenState extends State<MagicItemDetailScreen>{
                               });
                             },
                             backgroundColor: colors.primary,
-                            foregroundColor: colors.surface,
+                            foregroundColor: colors.background,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100)
                             ),
@@ -143,7 +148,7 @@ class MagicItemDetailScreenState extends State<MagicItemDetailScreen>{
                                 )
                             ), (_) => false),
                             backgroundColor: CustomColors.contrast,
-                            foregroundColor: colors.surface,
+                            foregroundColor: colors.background,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100)
                             ),

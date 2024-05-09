@@ -76,8 +76,8 @@ class EquipmentCreationScreenState extends State<EquipmentCreationScreen>{
             DataCreationTextForm(controller: rangeController, labelText: Texts.range),
             DataCreationTextForm(controller: damageController, labelText: Texts.damage),
             DataCreationTextForm(controller: speedController, labelText: Texts.speed, isNumeric: true,),
-            DataCreationTextForm(controller: contentsController, labelText: Texts.contents),
-            DataCreationTextForm(controller: propertiesController, labelText: Texts.properties),
+            DataCreationTextForm(controller: contentsController, labelText: Texts.contents, hintText: Texts.divideElements),
+            DataCreationTextForm(controller: propertiesController, labelText: Texts.properties, hintText: Texts.divideElements),
             DataCreationTextForm(controller: specialController, labelText: Texts.special),
             const Padding(
               padding: EdgeInsets.symmetric(vertical:8.0, horizontal: 32.0),

@@ -236,7 +236,7 @@ class UserSettingScreenState extends State<UserSettingsScreen>{
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100)
                             ),
-                            child: const Icon(Icons.logout, size: 30),
+                            child: Icon(Icons.logout, size: 30, color: colors.background),
                           ),
                         ),
                       )

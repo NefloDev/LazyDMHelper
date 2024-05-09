@@ -127,7 +127,7 @@ class ElementListScreenState extends State<ElementListScreen>{
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100)
                           ),
-                          child: const Icon(Icons.add)
+                          child: Icon(Icons.add, color: colors.background)
                       )
                     )
                   ]

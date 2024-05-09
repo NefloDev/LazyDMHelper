@@ -41,7 +41,12 @@ class EquipmentDetailScreenState extends State<EquipmentDetailScreen>{
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(equipment != null ? equipment!.name : Texts.equipmentTitle)
+          title: Text(equipment != null ? equipment!.name : Texts.equipmentTitle),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) => const ElementListScreen(title: Texts.equipment, endpoint: Texts.equipmentsEndpoint)), (_) => false),
+          ),
         ),
         body: equipment == null ? const Center(child: LoadingIndicator())
             : CustomScrollView(
@@ -112,8 +117,8 @@ class EquipmentDetailScreenState extends State<EquipmentDetailScreen>{
                       ),
                       widget.uid != "owner" ? Positioned(
                           bottom: 36,
-                          right: 36,
-                          left: 180,
+                          right: 24,
+                          left: 190,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -157,7 +162,7 @@ class EquipmentDetailScreenState extends State<EquipmentDetailScreen>{
                                     });
                                   },
                                   backgroundColor: colors.primary,
-                                  foregroundColor: colors.surface,
+                                  foregroundColor: colors.background,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(100)
                                   ),
@@ -172,7 +177,7 @@ class EquipmentDetailScreenState extends State<EquipmentDetailScreen>{
                                       )
                                   ), (_) => false),
                                   backgroundColor: CustomColors.contrast,
-                                  foregroundColor: colors.surface,
+                                  foregroundColor: colors.background,
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(100)
                                   ),

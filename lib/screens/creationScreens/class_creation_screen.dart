@@ -66,13 +66,13 @@ class ClassCreationScreenState extends State<ClassCreationScreen>{
         child: Column(
           children: [
             DataCreationTextForm(controller: nameController, labelText: "* ${Texts.name}"),
-            DataCreationTextForm(controller: proficiencyOptionsController, labelText: Texts.proficiencyOptions),
-            DataCreationTextForm(controller: proficienciesController, labelText: Texts.proficiencies),
-            DataCreationTextForm(controller: savingThrowsController, labelText: Texts.savingThrows),
-            DataCreationTextForm(controller: startingEquipmentController, labelText: Texts.startingEquipment),
-            DataCreationTextForm(controller: startingEquipmentOptionsController, labelText: Texts.startingEquipmentOptions),
-            DataCreationTextForm(controller: subclassesController, labelText: Texts.subClasses),
-            DataCreationTextForm(controller: spellCastingController, labelText: Texts.spellCasting),
+            DataCreationTextForm(controller: proficiencyOptionsController, labelText: Texts.proficiencyOptions, hintText: Texts.divideElements),
+            DataCreationTextForm(controller: proficienciesController, labelText: Texts.proficiencies, hintText: Texts.divideElements),
+            DataCreationTextForm(controller: savingThrowsController, labelText: Texts.savingThrows, hintText: Texts.divideElements),
+            DataCreationTextForm(controller: startingEquipmentController, labelText: Texts.startingEquipment, hintText: Texts.divideElements),
+            DataCreationTextForm(controller: startingEquipmentOptionsController, labelText: Texts.startingEquipmentOptions, hintText: Texts.divideElements),
+            DataCreationTextForm(controller: subclassesController, labelText: Texts.subClasses, hintText: Texts.divideElements),
+            DataCreationTextForm(controller: spellCastingController, labelText: Texts.spellCasting, hintText: "Usage -> Title::Desc#Title::Desc..."),
             const Padding(
               padding: EdgeInsets.symmetric(vertical:8.0, horizontal: 32.0),
               child: Text(Texts.requiredFields),

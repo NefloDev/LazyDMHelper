@@ -44,7 +44,12 @@ class RaceDetailScreenState extends State<RaceDetailScreen>{
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text(race != null ? race!.name : Texts.raceTitle)
+          title: Text(race != null ? race!.name : Texts.raceTitle),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () => Navigator.pushAndRemoveUntil(context,
+                MaterialPageRoute(builder: (context) => const ElementListScreen(title: Texts.races, endpoint: Texts.racesEndpoint)), (_) => false),
+          ),
         ),
         body: race == null ? const Center(child: LoadingIndicator())
             : CustomScrollView(
@@ -64,30 +69,30 @@ class RaceDetailScreenState extends State<RaceDetailScreen>{
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
+                                race!.asi.isNotEmpty ? Padding(
                                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                                     child: TitleAndText(title: Texts.asi, text: race!.asi)
-                                ),
-                                Padding(
+                                ) : const SizedBox.shrink(),
+                                race!.age.isNotEmpty ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                     child: TitleAndText(title: Texts.age, text: race!.age)
-                                ),
-                                Padding(
+                                ) : const SizedBox.shrink(),
+                                race!.size.isNotEmpty ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                     child: TitleAndText(title: Texts.size, text: race!.size)
-                                ),
-                                Padding(
+                                ) : const SizedBox.shrink(),
+                                race!.speed > 0 ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                     child: TitleAndText(title: Texts.speed, text: race!.speed.toString())
-                                ),
-                                Padding(
+                                ) : const SizedBox.shrink(),
+                                race!.alignment.isNotEmpty ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                     child: TitleAndText(title: Texts.alignment, text: race!.alignment)
-                                ),
-                                Padding(
+                                ) : const SizedBox.shrink(),
+                                race!.languages.isNotEmpty ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                     child: TitleAndText(title: Texts.languages, text: race!.languages)
-                                ),
+                                ) : const SizedBox.shrink(),
                                 race!.traits.isNotEmpty ? Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                     child: TitleAndText(title: Texts.traits, text: "· ${race!.traits.replaceAll("#", "\n· ")}")
@@ -111,8 +116,8 @@ class RaceDetailScreenState extends State<RaceDetailScreen>{
                   ),
                   widget.uid != "owner" ? Positioned(
                       bottom: 36,
-                      right: 36,
-                      left: 180,
+                      right: 24,
+                      left: 190,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -156,7 +161,7 @@ class RaceDetailScreenState extends State<RaceDetailScreen>{
                                 });
                               },
                               backgroundColor: colors.primary,
-                              foregroundColor: colors.surface,
+                              foregroundColor: colors.background,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(100)
                               ),
@@ -171,7 +176,7 @@ class RaceDetailScreenState extends State<RaceDetailScreen>{
                                   )
                               ), (_) => false),
                               backgroundColor: CustomColors.contrast,
-                              foregroundColor: colors.surface,
+                              foregroundColor: colors.background,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(100)
                               ),
