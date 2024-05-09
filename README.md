@@ -1,16 +1,2 @@
-# lazy_dm_helper
-
-A database application to help D&D DM's access data more easily.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Lazy DM Helper [Project Abandoned]
+This project won't get any update, it will be remade using Android, not Flutter.
