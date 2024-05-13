@@ -14,16 +14,14 @@ class DataCreationTextForm extends StatelessWidget{
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
-      child: Expanded(
-        child: TextFormField(
-          controller: controller,
-          decoration: InputDecoration(
-              border: const OutlineInputBorder(),
-              labelText: labelText,
-              hintText: hintText
-          ),
-          keyboardType: isNumeric || isDecimal ? TextInputType.numberWithOptions(decimal: isDecimal) : TextInputType.text,
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+            border: const OutlineInputBorder(),
+            labelText: labelText,
+            hintText: hintText
         ),
+        keyboardType: isNumeric || isDecimal ? TextInputType.numberWithOptions(decimal: isDecimal) : TextInputType.text,
       ),
     );
   }
