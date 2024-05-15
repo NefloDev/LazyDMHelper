@@ -8,6 +8,13 @@ import 'package:lazy_dm_helper/widgets/widgets.dart';
 class RegisterScreen extends StatefulWidget{
   const RegisterScreen({super.key});
 
+  static Route<void> route(){
+    return MaterialPageRoute(
+        builder: (_) => const RegisterScreen(),
+        settings:   const RouteSettings(name: "/menu")
+    );
+  }
+
   @override
   State<StatefulWidget> createState() => RegisterScreenState();
 }

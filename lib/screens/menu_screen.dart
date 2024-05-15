@@ -7,6 +7,13 @@ import 'package:lazy_dm_helper/widgets/widgets.dart';
 class MenuScreen extends StatelessWidget{
   const MenuScreen({super.key});
 
+  static Route<void> route(){
+    return MaterialPageRoute(
+        builder: (_) => const MenuScreen(),
+        settings:   const RouteSettings(name: "/menu")
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     ColorScheme colors = Theme.of(context).colorScheme;
